@@ -3,6 +3,7 @@ import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "./course-editor";
 import {Route, Routes} from "react-router-dom";
+import courseService, {findAllCourses, deleteCourse} from "../services/course.service.client";
 
 class CourseManager extends React.Component {
 
@@ -14,6 +15,45 @@ class CourseManager extends React.Component {
 		]
 	}
 
+	componentDidMount() {
+		courseService.findAllCourses().then(courses => this.setState({courses}));
+	}
+
+	addCourse = () => {
+		const newCourse = {
+			title: 'NEW COURSE',
+			owner: 'NEW OWNER',
+			lastModified: 'UNKNOWN'
+		}
+		courseService.createCourse(newCourse)
+			.then(course => this.setState(
+				(prevState) => ({
+					...prevState,
+					courses: [
+						...prevState.courses,
+						course
+					]
+				})))
+	}
+
+	deleteCourse = (courseToDelete) => {
+		courseService.deleteCourse(courseToDelete._id)
+			.then(status =>
+				this.setState((prevState) => ({
+					...prevState,
+					courses: prevState.courses.filter(course => course !== courseToDelete)
+				}))
+			)
+	}
+
+	updateCourse = (newCourse) => {
+		courseService.updateCourse(newCourse._id, newCourse)
+			.then(status => this.setState(prevState => ({
+				...prevState,
+				courses: prevState.courses.map((c) => c._id === newCourse._id ? newCourse : c)
+			})))
+	}
+
 	render() {
 		return (
 			<div>
@@ -23,6 +63,7 @@ class CourseManager extends React.Component {
 				<Route path="/courses/table" element={
 					<CourseTable
 						courses={this.state.courses}
+						updateCourse={this.updateCourse}
 						deleteCourse={this.deleteCourse}
 					/>
 				}
@@ -34,32 +75,11 @@ class CourseManager extends React.Component {
 					/>
 				}
 				/>
-				{/*<Route path="/courses/editor" element={*/}
-				{/*	<CourseEditor/>*/}
-				{/*}*/}
-				{/*/>*/}
 				<Route path="/courses/editor"
 							 element={<CourseEditor/>}
 				/>
 				</Routes>
 			</div>);
-	}
-
-	addCourse = () => {
-		const newCourse = {
-			title: 'NEW COURSE',
-			owner: 'NEW OWNER',
-			lastModified: 'UNKNOWN'
-		}
-		this.state.courses.push(newCourse);
-		this.setState(this.state);
-	}
-
-	deleteCourse = (courseToDelete) => {
-		const newCourses = this.state.courses.filter(course => course !== courseToDelete);
-		this.setState({
-			courses: newCourses
-		});
 	}
 
 }

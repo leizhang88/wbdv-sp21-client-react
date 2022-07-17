@@ -25,6 +25,7 @@ class CourseTable extends React.Component {
                 owner={course.owner}
                 lastModified={course.lastModified}
                 course={course}
+                updateCourse={this.props.updateCourse}
                 deleteCourse={this.props.deleteCourse}
               />
             )

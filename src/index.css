@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.wbdv-sticky-navbar {
+  padding: 10px;
+}
+
+.wbdv-sticky-navbar .wbdv-navbar-title {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.wbdv-add-course-btn {
+  color: red;
+}
+
+.wbdv-update-course-btn {
+  color: green;
+}
+
+.wbdv-delete-course-btn {
+  color: red;
+}

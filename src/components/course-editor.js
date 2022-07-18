@@ -1,13 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-const CourseEditor = ({props}) => {
-  const navigate = useNavigate();
+const CourseEditor = ({history}) => {
   return (
     <div>
       <h2>
         Course Editor
-        <i onClick={() => navigate(-1)} className="fas fa-times float-end"></i>
+        <i onClick={() => history.goBack()} className="fas fa-times float-end"></i>
       </h2>
     </div>
   );

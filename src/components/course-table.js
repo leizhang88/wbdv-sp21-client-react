@@ -11,11 +11,21 @@ class CourseTable extends React.Component {
   render() {
     return (
       <div>
-        <Link to="/courses/grid">
-          <i className="fas fa-2x fa-solid fa-th-large float-end"></i>
-        </Link>
-        <h2>Course Table</h2>
         <table className="table">
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th>Owned by</th>
+            <th>Last modified</th>
+            <th>
+              <span className="float-end">
+                <Link to="/courses/grid">
+                  <i className="fas fa-2x fa-th-large"></i>
+                </Link>
+              </span>
+            </th>
+          </tr>
+          </thead>
           <tbody>
           {
             this.props.courses.map((course, idx) =>

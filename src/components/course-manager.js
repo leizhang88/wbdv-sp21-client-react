@@ -2,85 +2,101 @@ import React from "react";
 import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "./course-editor";
-import {Route, Routes} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 import courseService, {findAllCourses, deleteCourse} from "../services/course.service.client";
 
 class CourseManager extends React.Component {
 
-	state = {
-		courses: [
-			{title: 'CS5200', owner: 'me', lastModified: '07/08/2022'},
-			{title: 'CS5600', owner: 'me', lastModified: '07/08/2022'},
-			{title: 'CS5610', owner: 'me', lastModified: '07/08/2022'}
-		]
-	}
+  state = {
+    courses: [],
+    title: 'XXX'
+  }
 
-	componentDidMount() {
-		courseService.findAllCourses().then(courses => this.setState({courses}));
-	}
+  componentDidMount() {
+    courseService.findAllCourses().then(courses => this.setState({courses}));
+  }
 
-	addCourse = () => {
-		const newCourse = {
-			title: 'NEW COURSE',
-			owner: 'NEW OWNER',
-			lastModified: 'UNKNOWN'
-		}
-		courseService.createCourse(newCourse)
-			.then(course => this.setState(
-				(prevState) => ({
-					...prevState,
-					courses: [
-						...prevState.courses,
-						course
-					]
-				})))
-	}
+  getDateTime = () => {
+    let d = new Date();
+    return (`
+    ${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}@${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}
+    `);
+  }
 
-	deleteCourse = (courseToDelete) => {
-		courseService.deleteCourse(courseToDelete._id)
-			.then(status =>
-				this.setState((prevState) => ({
-					...prevState,
-					courses: prevState.courses.filter(course => course !== courseToDelete)
-				}))
-			)
-	}
+  addCourse = () => {
+    const newCourse = {
+      title: this.state.title,
+      owner: 'Me',
+      lastModified: this.getDateTime()
+    }
+    courseService.createCourse(newCourse)
+      .then(course => this.setState((prevState) => (
+        {
+          ...prevState,
+          courses: [...prevState.courses, course]
+        })))
+  }
 
-	updateCourse = (newCourse) => {
-		courseService.updateCourse(newCourse._id, newCourse)
-			.then(status => this.setState(prevState => ({
-				...prevState,
-				courses: prevState.courses.map((c) => c._id === newCourse._id ? newCourse : c)
-			})))
-	}
+  deleteCourse = (courseToDelete) => {
+    courseService.deleteCourse(courseToDelete._id)
+      .then(status => this.setState((prevState) => ({
+        ...prevState, courses: prevState.courses.filter(course => course !== courseToDelete)
+      })))
+  }
 
-	render() {
-		return (
-			<div>
-				<h1>Course Manager</h1>
-				<button onClick={this.addCourse}>Add Course</button>
-				<Routes>
-				<Route path="/courses/table" element={
-					<CourseTable
-						courses={this.state.courses}
-						updateCourse={this.updateCourse}
-						deleteCourse={this.deleteCourse}
-					/>
-				}
-				/>
-				<Route path="/courses/grid" element={
-					<CourseGrid
-						courses={this.state.courses}
-						deleteCourse={this.deleteCourse}
-					/>
-				}
-				/>
-				<Route path="/courses/editor"
-							 element={<CourseEditor/>}
-				/>
-				</Routes>
-			</div>);
-	}
+  updateCourse = (newCourse) => {
+    courseService.updateCourse(newCourse._id, newCourse)
+      .then(status => this.setState(prevState => ({
+        ...prevState, courses: prevState.courses.map((c) => c._id === newCourse._id ? newCourse : c)
+      })))
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="wbdv-sticky-navbar mb-3">
+          <div className="row">
+            <div className="col-1">
+              <i className="fas fa-2x fa-bars"></i>
+            </div>
+            <div className="col-2 wbdv-navbar-title">
+              <span>Course Manager</span>
+            </div>
+            <div className="col-8">
+              <input
+                onChange={(event) => this.state.title = event.target.value}
+                className="form-control"
+              />
+            </div>
+            <div className="col-1">
+							<span className="float-end">
+							  <i
+                  onClick={this.addCourse}
+                  className="fas fa-2x fa-circle-plus wbdv-add-course-btn"
+                ></i>
+                <Link to="/">
+                  <i className="fas fa-2x fa-home"></i>
+                </Link>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <Route path="/courses/table" exact={true}>
+          <CourseTable
+            courses={this.state.courses}
+            updateCourse={this.updateCourse}
+            deleteCourse={this.deleteCourse}
+          />
+        </Route>
+        <Route path="/courses/grid" exact={true}>
+          <CourseGrid
+            courses={this.state.courses}
+            deleteCourse={this.deleteCourse}
+          />
+        </Route>
+      </div>);
+  }
 
 }
 

@@ -29,6 +29,7 @@ const CourseRow = (
         {
           !editing &&
           <Link to="/courses/editor">
+            <i className="fas fa fa-file mx-1"></i>
             {title}
           </Link>
         }
@@ -45,9 +46,23 @@ const CourseRow = (
       <td>{lastModified}</td>
       <td>
       <span className="d-flex justify-content-end">
-        {editing && <i onClick={() => saveTitle()} className="fas fa-check me-sm-2 me-xs-1"></i>}
-        {!editing && <i onClick={() => setEditing(true)} className="fas fa-edit me-sm-2 me-xs-1"></i>}
-        <i onClick={() => deleteCourse(course)} className="fas fa-trash me-sm-2 me-xs-1"></i>
+        {editing &&
+          <i
+            onClick={() => saveTitle()}
+            className="fas fa-check me-sm-2 me-xs-1 wbdv-update-course-btn"
+          ></i>
+        }
+        {!editing &&
+          <i
+            onClick={() => setEditing(true)}
+            className="fas fa-edit me-sm-2 me-xs-1"
+          ></i>
+        }
+        {editing && <i
+          onClick={() => deleteCourse(course)}
+          className="fas fa-xmark me-sm-2 me-xs-1 wbdv-delete-course-btn"
+        ></i>
+        }
       </span>
       </td>
     </tr>

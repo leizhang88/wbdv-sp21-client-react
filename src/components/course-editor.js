@@ -4,8 +4,11 @@ import moduleReducer from "../reducers/module-reducer";
 import {createStore} from "redux";
 import {Provider} from "react-redux";
 import ModuleList from "./module-list";
+import LessonTabs from "./lesson-tabs";
+import lessonReducer from "../reducers/lesson-reducer";
 
-const store = createStore(moduleReducer)
+// const store = createStore(moduleReducer)
+const store = createStore(lessonReducer)
 
 const CourseEditor = ({history}) => {
   return (
@@ -16,6 +19,7 @@ const CourseEditor = ({history}) => {
           <i onClick={() => history.goBack()} className="fas fa-times float-end"></i>
         </h2>
         <ModuleList/>
+        <LessonTabs/>
       </div>
     </Provider>
   );

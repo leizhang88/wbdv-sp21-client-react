@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 
-const ModuleList = ({myModules}) => (
+const ModuleList = ({myModules=[]}) => (
   <div>
     <h2>Module List</h2>
     <ul className="list-group">

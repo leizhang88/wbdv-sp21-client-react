@@ -2,12 +2,9 @@ import React, {useState} from "react";
 
 const EditableItem = (
   {
-    item =
-      {
-        title: 'NEW ITEM',
-      },
-    deleteItem,
-    updateItem
+    item = {title: 'NEW ITEM'},
+    deleteItem=(o) => alert("Delete " + o.title),
+    updateItem=(o) => alert("Update " + o.title)
   }
 ) => {
   const [editing, setEditing] = useState(false);

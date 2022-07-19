@@ -24,7 +24,7 @@ const ModuleList = (
           </li>
         )
       }
-      <li className="list-group-item ">
+      <li className="list-group-item">
         <span className="d-flex justify-content-center">
           <i onClick={createModule} className="fas fa-plus"></i>
         </span>

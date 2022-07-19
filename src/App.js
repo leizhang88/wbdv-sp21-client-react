@@ -8,10 +8,10 @@ import CourseEditor from "./components/course-editor";
 function App() {
   return (
     <BrowserRouter>
-      <div className="container-fluid">
+      <div className="">
         <Route path="/" exact={true} component={Home}/>
         <Route path="/courses" component={CourseManager}/>
-        <Route path="/courses/editor" component={CourseEditor}/>
+        <Route path="/editor" component={CourseEditor}/>
       </div>
     </BrowserRouter>
   );

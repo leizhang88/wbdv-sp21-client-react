@@ -81,20 +81,21 @@ class CourseManager extends React.Component {
             </div>
           </div>
         </div>
-
-        <Route path="/courses/table" exact={true}>
-          <CourseTable
-            courses={this.state.courses}
-            updateCourse={this.updateCourse}
-            deleteCourse={this.deleteCourse}
-          />
-        </Route>
-        <Route path="/courses/grid" exact={true}>
-          <CourseGrid
-            courses={this.state.courses}
-            deleteCourse={this.deleteCourse}
-          />
-        </Route>
+        <div className="container-lg">
+          <Route path="/courses/table" exact={true}>
+            <CourseTable
+              courses={this.state.courses}
+              updateCourse={this.updateCourse}
+              deleteCourse={this.deleteCourse}
+            />
+          </Route>
+          <Route path="/courses/grid" exact={true}>
+            <CourseGrid
+              courses={this.state.courses}
+              deleteCourse={this.deleteCourse}
+            />
+          </Route>
+        </div>
       </div>);
   }
 

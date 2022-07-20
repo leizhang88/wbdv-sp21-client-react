@@ -16,13 +16,11 @@ const LessonTabs = (
       {
         lessons.map((lesson, idx) =>
           <li key={idx} className="nav-item">
-            <a className="nav-link" href="#">
-              <EditableItem
-                deleteItem={deleteLesson}
-                updateItem={updateLesson}
-                item={lesson}
-              />
-            </a>
+            <EditableItem
+              deleteItem={deleteLesson}
+              updateItem={updateLesson}
+              item={lesson}
+            />
           </li>
         )
       }

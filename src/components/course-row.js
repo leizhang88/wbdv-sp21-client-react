@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import {updateCourse} from "../services/course.service.client";
+import {updateCourse} from "../services/course-service";
 
 const CourseRow = (
   {
@@ -28,7 +28,7 @@ const CourseRow = (
       <td>
         {
           !editing &&
-          <Link to="/editor">
+          <Link to={`/editor/${course._id}`}>
             <i className="fas fa fa-file mx-1"></i>
             {title}
           </Link>

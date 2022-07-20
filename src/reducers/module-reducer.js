@@ -2,21 +2,23 @@ import React from "react";
 
 const initialState = {
   modules: [
-    {_id: '0032', title: 'module-32'},
-    {_id: '0046', title: 'module-46'},
+    // {_id: '0032', title: 'module-32'},
+    // {_id: '0046', title: 'module-46'},
   ]
 }
 
 const moduleReducer = (state=initialState, action) => {
   switch (action.type) {
+    case 'FIND_MODULES_FOR_COURSE':
+      return {
+        ...state,
+        modules: action.modules
+      }
     case  'CREATE_MODULE':
       return {
         modules: [
           ...state.modules,
-          {
-            _id: (new Date()).getTime(),
-            title: 'NEW MODULE'
-          }
+          action.module
         ]
       }
     case 'DELETE_MODULE':

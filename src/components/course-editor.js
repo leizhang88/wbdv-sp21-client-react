@@ -1,5 +1,5 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import moduleReducer from "../reducers/module-reducer";
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
@@ -18,11 +18,12 @@ const reducer = combineReducers({
 const store = createStore(reducer)
 
 const CourseEditor = ({history}) => {
+  const {courseId} = useParams();
   return (
     <Provider store={store}>
       <div className="container-lg">
         <h2>
-          Course Editor
+          Course {courseId}
           <i onClick={() => history.goBack()} className="fas fa-times float-end"></i>
         </h2>
         <div className="row">
@@ -39,6 +40,6 @@ const CourseEditor = ({history}) => {
       </div>
     </Provider>
   );
-};
+}
 
 export default CourseEditor;

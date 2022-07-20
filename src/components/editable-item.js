@@ -1,7 +1,9 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 
 const EditableItem = (
   {
+    to='/SOMEWHERE/',
     item = {title: 'NEW ITEM'},
     deleteItem=(o) => alert("Delete " + o.title),
     updateItem=(o) => alert("Update " + o.title)
@@ -13,7 +15,9 @@ const EditableItem = (
     <>
       {!editing &&
         <>
-          {item.title}
+          <Link className="nav-link" to={to}>
+            {item.title}
+          </Link>
           <i onClick={() => setEditing(true)} className="ms-1 fas fa-edit"></i>
         </>
       }
@@ -30,7 +34,7 @@ const EditableItem = (
                 value={cachedItem.title}
               />
             </span>
-            <span className="col-sm-3 d-flex justify-content-end">
+            <span className="col-sm-3 d-flex justify-content-start">
               <i
                 onClick={() => {
                   setEditing(false)

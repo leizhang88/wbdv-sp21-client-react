@@ -3,13 +3,13 @@ import CourseTable from "./course-table";
 import CourseGrid from "./course-grid";
 import CourseEditor from "./course-editor";
 import {Link, Route} from "react-router-dom";
-import courseService, {findAllCourses, deleteCourse} from "../services/course.service.client";
+import courseService from "../services/course-service";
 
 class CourseManager extends React.Component {
 
   state = {
     courses: [],
-    title: 'XXX'
+    title: 'XXXX'
   }
 
   componentDidMount() {

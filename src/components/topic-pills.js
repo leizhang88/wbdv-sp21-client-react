@@ -14,14 +14,14 @@ const TopicPills = (
     <h3>Topics</h3>
     <nav className="nav nav-pills">{
       topics.map((topic, idx) =>
-        <a key={idx} className="nav-link" href="#">
+        <li key={idx} className="nav-item">
           <EditableItem
             createItem={createTopic}
             deleteItem={deleteTopic}
             updateItem={updateTopic}
             item={topic}
           />
-        </a>
+        </li>
       )
     }
     <a className="nav-link" herf="#">

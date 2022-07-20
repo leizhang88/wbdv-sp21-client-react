@@ -21,7 +21,7 @@ const CourseEditor = ({history}) => {
   const {courseId} = useParams();
   return (
     <Provider store={store}>
-      <div className="container-lg">
+      <div className="container-md">
         <h2>
           Course {courseId}
           <i onClick={() => history.goBack()} className="fas fa-times float-end"></i>

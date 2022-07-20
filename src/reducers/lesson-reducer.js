@@ -25,7 +25,7 @@ const lessonReducer = (state=initialState, action) => {
     case 'DELETE_LESSON':
       return ({
         ...state,
-        lessons: state.lessons.filter(l => l._id === action.lessonToDelete._id ? false : true)
+        lessons: state.lessons.filter(l => l._id !== action.lessonToDelete._id)
       })
     case 'UPDATE_LESSON':
       return ({

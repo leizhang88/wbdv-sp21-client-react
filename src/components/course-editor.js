@@ -18,7 +18,7 @@ const reducer = combineReducers({
 const store = createStore(reducer)
 
 const CourseEditor = ({history}) => {
-  const {courseId} = useParams();
+  const {courseId, lessonId} = useParams();
   return (
     <Provider store={store}>
       <div className="container-md">
@@ -32,9 +32,10 @@ const CourseEditor = ({history}) => {
           </div>
           <div className="col-8">
             <LessonTabs/>
-            <TopicPills/>
-            <h3>Content</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam, asperiores blanditiis ducimus esse exercitationem id illum ipsam itaque nam nisi numquam officiis, omnis quae quas quod tempore voluptatem voluptates?</p>
+            {
+              lessonId !== "undefined" && typeof lessonId !== "undefined" &&
+              <TopicPills/>
+            }
           </div>
         </div>
       </div>

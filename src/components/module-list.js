@@ -13,10 +13,11 @@ const ModuleList = (
     findModulesForCourse
   }
 ) => {
-  const {courseId} = useParams();
+  const {courseId, moduleId} = useParams();
   useEffect(() => {
-    findModulesForCourse(courseId)
-    },
+    if(moduleId !== "undefined" && typeof moduleId !== "undefined") {
+      findModulesForCourse(courseId)
+    }},
     []
   );
   return (
@@ -25,7 +26,7 @@ const ModuleList = (
       <ul className="list-group">
         {
           myModules.map((module, idx) =>
-            <li key={idx} className="list-group-item">
+            <li key={idx} className={`list-group-item ${module._id === moduleId ? 'active' : ''}`}>
               <EditableItem
                 to={`/editor/${courseId}/${module._id}`}
                 deleteItem={deleteModule}
@@ -37,7 +38,7 @@ const ModuleList = (
         }
         <li className="list-group-item">
         <span className="d-flex justify-content-center">
-          <i onClick={() => createModule(courseId)} className="fas fa-plus"></i>
+          <i onClick={() => createModule(courseId)} className="fas fa-plus-circle"></i>
         </span>
         </li>
       </ul>

@@ -3,6 +3,18 @@ import EditableItem from "./editable-item";
 import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
 import topicService from "../services/topic-service";
+import { LoremIpsum } from "lorem-ipsum";
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 10,
+    min: 4
+  },
+  wordsPerSentence: {
+    max: 10,
+    min: 4
+  }
+});
 
 const TopicPills = (
   {
@@ -13,11 +25,12 @@ const TopicPills = (
     updateTopic,
   }
   ) => {
-  const {courseId, moduleId, lessonId} = useParams();
+  const {courseId, moduleId, lessonId, topicId} = useParams();
   useEffect(() => findTopicsForLesson(lessonId), [lessonId]);
+
   return (
     <div className="mb-3">
-      <h3>Topics {lessonId}</h3>
+      <h4>Topics</h4>
       <nav className="nav nav-pills">{
         topics.map((topic, idx) =>
           <li key={idx} className="nav-item">
@@ -26,6 +39,7 @@ const TopicPills = (
               deleteItem={deleteTopic}
               updateItem={updateTopic}
               item={topic}
+              active={topic._id === topicId}
             />
           </li>
         )
@@ -33,10 +47,18 @@ const TopicPills = (
         <a className="nav-link" herf="#">
           <i
             onClick={() => createTopic(lessonId)}
-            className="fas fa fa-plus justify-content-center"
+            className="fas fa fa-plus-circle justify-content-center"
           ></i>
         </a>
       </nav>
+      {
+        topicId !== "undefined" && typeof topicId !== "undefined" &&
+        topics.find(t => t._id === topicId) &&
+        <p className="my-2">{
+          topics.filter(t => t._id === topicId)[0].content
+          }
+        </p>
+      }
     </div>
   )
 }
@@ -54,11 +76,17 @@ const dtpm = (dispatch) => ({
         topics: actualTopics
       })),
   createTopic: (lessonId) =>
-    topicService.createTopic(lessonId, {title: "NEW TOPIC"})
-      .then(newTopic => dispatch({
-        type: 'CREATE_TOPIC',
-        topic: newTopic
-      })),
+    topicService.createTopic(lessonId, {
+      title: "NEW TOPIC",
+      content: lorem.generateSentences(2)
+    })
+      .then(newTopic => {
+        dispatch({
+          type: 'CREATE_TOPIC',
+          topic: newTopic
+        })
+        return <p>content</p>
+      }),
   deleteTopic: (topic) =>
     topicService.deleteTopic(topic._id)
       .then(status => dispatch({

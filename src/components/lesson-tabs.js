@@ -13,11 +13,11 @@ const LessonTabs = (
     updateLesson,
   }
   ) => {
-  const {courseId, moduleId} = useParams();
+  const {courseId, moduleId, lessonId} = useParams();
   useEffect(() => findLessonsForModule(moduleId), [moduleId])
   return (
     <div className="mb-3">
-      <h3>Lessons {moduleId}</h3>
+      <h3>Lessons</h3>
       <ul className="nav nav-tabs">
         {
           lessons.map((lesson, idx) =>
@@ -27,6 +27,7 @@ const LessonTabs = (
                 deleteItem={deleteLesson}
                 updateItem={updateLesson}
                 item={lesson}
+                active={lesson._id === lessonId}
               />
             </li>
           )
@@ -35,7 +36,7 @@ const LessonTabs = (
           <a className="nav-link" href="#">
             <i
               onClick={() => createLesson(moduleId)}
-              className="fas fa fa-plus justify-content-center"
+              className="fas fa fa-plus-circle justify-content-center"
             ></i>
           </a>
         </li>

@@ -5,6 +5,7 @@ const EditableItem = (
   {
     to='/SOMEWHERE/',
     item = {title: 'NEW ITEM'},
+    active=false,
     deleteItem=(o) => alert("Delete " + o.title),
     updateItem=(o) => alert("Update " + o.title)
   }
@@ -15,7 +16,7 @@ const EditableItem = (
     <>
       {!editing &&
         <>
-          <Link className="nav-link" to={to}>
+          <Link className={`nav-link ${active ? 'active' : ''} d-inline-flex`} to={to}>
             {item.title}
           </Link>
           <i onClick={() => setEditing(true)} className="ms-1 fas fa-edit"></i>
@@ -23,8 +24,8 @@ const EditableItem = (
       }
       {editing &&
         <>
-          <span className="row">
-              <span className="col-sm-9">
+          <span className="d-flex">
+              <span className="">
               <input
                 onChange={(e) => setCachedItem({
                   ...cachedItem,
@@ -34,7 +35,7 @@ const EditableItem = (
                 value={cachedItem.title}
               />
             </span>
-            <span className="col-sm-3 d-flex justify-content-start">
+            <span className="">
               <i
                 onClick={() => {
                   setEditing(false)

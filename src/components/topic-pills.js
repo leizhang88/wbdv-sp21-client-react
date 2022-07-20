@@ -14,7 +14,7 @@ const TopicPills = (
   }
   ) => {
   const {courseId, moduleId, lessonId} = useParams();
-  useEffect(() => findTopicsForLesson(lessonId), []);
+  useEffect(() => findTopicsForLesson(lessonId), [lessonId]);
   return (
     <div className="mb-3">
       <h3>Topics {lessonId}</h3>

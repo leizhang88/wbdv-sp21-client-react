@@ -14,7 +14,7 @@ const LessonTabs = (
   }
   ) => {
   const {courseId, moduleId} = useParams();
-  useEffect(() => findLessonsForModule(moduleId), [])
+  useEffect(() => findLessonsForModule(moduleId), [moduleId])
   return (
     <div className="mb-3">
       <h3>Lessons {moduleId}</h3>

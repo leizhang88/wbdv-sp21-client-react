@@ -20,7 +20,7 @@ const topicReducer = (state=initialState, action) => {
         ...state,
         topics: [
           ...state.topics,
-          {_id: (new Date()).getTime(), title: 'NEW TOPIC'}
+          action.topic
         ]
       })
     case 'DELETE_TOPIC':

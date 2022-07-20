@@ -16,6 +16,7 @@ function App() {
           "/editor/:courseId",
           "/editor/:courseId/:moduleId",
           "/editor/:courseId/:moduleId/:lessonId",
+          "/editor/:courseId/:moduleId/:lessonId/:topicId",
           "/courses/:layout/edit/:courseId/modules/:moduleId/lessons/:lessonId/topics/:topicId"
         ]}
                exact={true}

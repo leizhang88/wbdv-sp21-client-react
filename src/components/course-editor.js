@@ -32,10 +32,7 @@ const CourseEditor = ({history}) => {
           </div>
           <div className="col-8">
             <LessonTabs/>
-            {
-              lessonId !== "undefined" && typeof lessonId !== "undefined" &&
-              <TopicPills/>
-            }
+            <TopicPills/>
           </div>
         </div>
       </div>

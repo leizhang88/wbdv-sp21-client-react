@@ -3,18 +3,6 @@ import EditableItem from "./editable-item";
 import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
 import topicService from "../services/topic-service";
-import { LoremIpsum } from "lorem-ipsum";
-
-const lorem = new LoremIpsum({
-  sentencesPerParagraph: {
-    max: 10,
-    min: 4
-  },
-  wordsPerSentence: {
-    max: 10,
-    min: 4
-  }
-});
 
 const TopicPills = (
   {
@@ -51,14 +39,14 @@ const TopicPills = (
           ></i>
         </a>
       </nav>
-      {
-        topicId !== "undefined" && typeof topicId !== "undefined" &&
-        topics.find(t => t._id === topicId) &&
-        <p className="my-2">{
-          topics.filter(t => t._id === topicId)[0].content
-          }
-        </p>
-      }
+      {/*{*/}
+      {/*  topicId !== "undefined" && typeof topicId !== "undefined" &&*/}
+      {/*  topics.find(t => t._id === topicId) &&*/}
+      {/*  <p className="my-2">{*/}
+      {/*    topics.filter(t => t._id === topicId)[0]._id*/}
+      {/*    }*/}
+      {/*  </p>*/}
+      {/*}*/}
     </div>
   )
 }
@@ -78,7 +66,6 @@ const dtpm = (dispatch) => ({
   createTopic: (lessonId) =>
     topicService.createTopic(lessonId, {
       title: "NEW TOPIC",
-      content: lorem.generateSentences(2)
     })
       .then(newTopic => {
         dispatch({

@@ -8,7 +8,7 @@ const CourseCard = ({course, deleteCourse}) => (
                 <h5 className="card-title">{course.title}</h5>
                 <p className="card-text">Some quick example text to build on the card title and make up the bulk of
                     the card's content.</p>
-                <Link to={`/editor/${course._id}`} className="btn btn-primary">
+                <Link to={`/courses/edit/${course._id}`} className="btn btn-primary">
                   Edit
                 </Link>
                 <i onClick={() => deleteCourse(course)} className="fas fa-trash"></i>

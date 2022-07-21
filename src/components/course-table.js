@@ -11,6 +11,19 @@ class CourseTable extends React.Component {
   render() {
     return (
       <div>
+        <div className="row">
+          <nav className="col-10">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+              <li className="breadcrumb-item active">Courses</li>
+            </ol>
+          </nav>
+          <span className="col-2 d-flex justify-content-end">
+            <Link to="/courses/grid">
+              <i className="fas fa fa-th-large"></i>
+            </Link>
+          </span>
+        </div>
         <table className="table">
           <thead>
           <tr>
@@ -18,11 +31,6 @@ class CourseTable extends React.Component {
             <th>Owned by</th>
             <th>Last modified</th>
             <th>
-              <span className="float-end">
-                <Link to="/courses/grid">
-                  <i className="fas fa-2x fa-th-large"></i>
-                </Link>
-              </span>
             </th>
           </tr>
           </thead>

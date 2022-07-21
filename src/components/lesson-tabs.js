@@ -21,7 +21,15 @@ const LessonTabs = (
     [moduleId]);
   return (
     <div className="mb-3">
-      <h3>Lessons</h3>
+      <div className="d-flex">
+        <h3>Lessons</h3>
+        <div className="mx-2">
+            <span onClick={() => createLesson(moduleId)}
+                  className="badge rounded-pill text-bg-primary">
+              <i className="fas fa fa-plus mx-1"></i>
+            </span>
+        </div>
+      </div>
       <ul className="nav nav-tabs">
         {
           lessons.map((lesson, idx) =>
@@ -36,14 +44,6 @@ const LessonTabs = (
             </li>
           )
         }
-        <li className="nav-item">
-          <a className="nav-link" href="#">
-            <i
-              onClick={() => createLesson(moduleId)}
-              className="fas fa fa-plus-circle justify-content-center"
-            ></i>
-          </a>
-        </li>
       </ul>
     </div>
   )

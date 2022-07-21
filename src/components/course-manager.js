@@ -30,6 +30,7 @@ const CourseManager = (
             <input
               onChange={(e) => setCourseTitle(e.target.value)}
               className="form-control"
+              placeholder="New Course Title"
             />
           </div>
           <div className="col-2">

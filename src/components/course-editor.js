@@ -1,10 +1,11 @@
 import React, {useEffect} from "react";
-import {useParams, Link} from "react-router-dom";
+import {useParams, Link, Route} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import ModuleList from "./module-list";
 import LessonTabs from "./lesson-tabs";
 import TopicPills from "./topic-pills";
 import courseService from "../services/course-service";
+import WidgetList from "./course-editor/widgets/widget-list";
 
 const CourseEditor = (
   {
@@ -41,6 +42,7 @@ const CourseEditor = (
         <div className="col-8">
           <LessonTabs/>
           <TopicPills/>
+          <WidgetList/>
         </div>
       </div>
     </div>

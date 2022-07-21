@@ -35,9 +35,12 @@ const ModuleList = (
           )
         }
         <li className="list-group-item">
-        <span className="d-flex justify-content-center">
-          <i onClick={() => createModule(courseId)} className="fas fa-plus-circle"></i>
-        </span>
+        <div className="d-flex justify-content-center">
+          <span onClick={() => createModule(courseId)}
+                className="badge rounded-pill text-bg-primary">
+            <i className="fas fa fa-plus mx-1"></i>
+          </span>
+        </div>
         </li>
       </ul>
     </div>

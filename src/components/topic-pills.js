@@ -18,7 +18,15 @@ const TopicPills = (
 
   return (
     <div className="mb-3">
-      <h4>Topics</h4>
+      <div className="d-flex">
+        <h4>Topics</h4>
+        <div className="mx-2">
+          <span onClick={() => createTopic(lessonId)}
+                className="badge rounded-pill text-bg-primary">
+            <i className="fas fa fa-plus mx-1"></i>
+          </span>
+        </div>
+      </div>
       <nav className="nav nav-pills">{
         topics.map((topic, idx) =>
           <li key={idx} className="nav-item">
@@ -32,12 +40,6 @@ const TopicPills = (
           </li>
         )
       }
-        <a className="nav-link" herf="#">
-          <i
-            onClick={() => createTopic(lessonId)}
-            className="fas fa fa-plus-circle justify-content-center"
-          ></i>
-        </a>
       </nav>
       {/*{*/}
       {/*  topicId !== "undefined" && typeof topicId !== "undefined" &&*/}

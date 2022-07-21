@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
+/*Custom Styles*/
 .wbdv-sticky-navbar {
   padding: 10px;
 }
@@ -32,4 +33,13 @@ code {
 
 .wbdv-delete-course-btn {
   color: red;
+}
+
+.nav-pills .nav-link.active {
+  /*background-color: orange;*/
+  --bs-nav-pills-link-active-bg: #0d6efdab;
+}
+
+.list-group .list-group-item.active {
+  background-color: #0d6efdd9;
 }

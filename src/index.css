@@ -43,3 +43,8 @@ code {
 .list-group .list-group-item.active {
   background-color: #0d6efdd9;
 }
+
+.wbdv-widget-btn {
+  padding: 2px;
+  height: 25px;
+}

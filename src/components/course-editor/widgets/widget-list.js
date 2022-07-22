@@ -4,6 +4,19 @@ import {connect} from "react-redux";
 import widgetService from "../../../services/widget-service";
 import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
+import {LoremIpsum} from "lorem-ipsum";
+
+
+const lorem = new LoremIpsum({
+  sentencesPerParagraph: {
+    max: 8,
+    min: 4
+  },
+  wordsPerSentence: {
+    max: 16,
+    min: 6
+  }
+});
 
 const WidgetList = (
   {
@@ -16,14 +29,38 @@ const WidgetList = (
   const {topicId} = useParams();
   useEffect(() => findWidgetsForTopic(topicId), [topicId]);
   const [editingWidget, setEditingWidget] = useState({});
+  const [type, setType] = useState("");
+  const [text, setText] = useState("");
   return (<div>
-      <div className="d-flex">
-        <h4>Widget List</h4>
-        <div className="mx-2">
-            <span onClick={() => createWidget(topicId)}
-                  className="badge rounded-pill text-bg-warning">
-              <i className="fas fa fa-plus mx-0"></i>
-            </span>
+      <div className="d-flex mb-2">
+        <div className="text-secondary text-opacity-75">Add widget:</div>
+        <div className="mx-1">
+            <button onClick={() => {
+              setType("HEADING");
+              setText("Header");
+              createWidget(topicId, {type, text})}}
+                    className="btn btn-sm btn-outline-secondary wbdv-widget-btn">heading</button>
+        </div>
+        <div className="mx-1">
+            <button onClick={() => {
+              setType("PARAGRAPH");
+              setText(lorem.generateParagraphs(2));
+              createWidget(topicId, {type, text})}}
+                    className="btn btn-sm btn-outline-secondary wbdv-widget-btn">paragraph</button>
+        </div>
+        <div className="mx-1">
+            <button onClick={() => {
+              setType("LIST");
+              setText("first line\/nsecond line");
+              createWidget(topicId, {type, text})}}
+                    className="btn btn-sm btn-outline-secondary wbdv-widget-btn">list</button>
+        </div>
+        <div className="mx-1">
+            <button onClick={() => {
+              setType("IMAGE");
+              setText("An image");
+              createWidget(topicId, {type, text, src: ""})}}
+                    className="btn btn-sm btn-outline-secondary wbdv-widget-btn">image</button>
         </div>
       </div>
       <ul className="list-group">
@@ -54,8 +91,8 @@ const dtmp = (dispatch) => ({
     .then(actualWidgets => dispatch({
       type: "FIND_WIDGETS_FOR_TOPIC", widgets: actualWidgets
     })),
-  createWidget: (topicId) =>
-    widgetService.createWidget(topicId, {text: "WIDGET TEXT", type: "HEADING"})
+  createWidget: (topicId, widget) =>
+    widgetService.createWidget(topicId, widget)
     .then(newWidget => dispatch({
       type: "CREATE_WIDGET", widget: newWidget
     })),

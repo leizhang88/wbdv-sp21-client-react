@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import widgetService from "../../../services/widget-service";
@@ -15,6 +15,7 @@ const WidgetList = (
   }) => {
   const {topicId} = useParams();
   useEffect(() => findWidgetsForTopic(topicId), [topicId]);
+  const [editingWidget, setEditingWidget] = useState({});
   return (<div>
       <div className="d-flex">
         <h4>Widget List</h4>
@@ -28,10 +29,18 @@ const WidgetList = (
       <ul className="list-group">
         {widgets.map((w, idx) => (
           <li key={idx} className="list-group-item">
-            {w.type === "HEADING" && <HeadingWidget widget={w}/>}
-            {w.type === "PARAGRAPH" && <ParagraphWidget widget={w}/>}
+            {
+              w.type === "HEADING" &&
+              <HeadingWidget
+                widget={w}
+                deleteWidget={deleteWidget}
+                updateWidget={updateWidget}
+              />
+            }
+            {
+              w.type === "PARAGRAPH" && <ParagraphWidget widget={w}/>
+            }
           </li>))}
-        {JSON.stringify(widgets)}
       </ul>
     </div>)
 }
@@ -46,17 +55,17 @@ const dtmp = (dispatch) => ({
       type: "FIND_WIDGETS_FOR_TOPIC", widgets: actualWidgets
     })),
   createWidget: (topicId) =>
-    widgetService.createWidget(topicId, {text: "WIDGET TEXT"})
+    widgetService.createWidget(topicId, {text: "WIDGET TEXT", type: "HEADING"})
     .then(newWidget => dispatch({
       type: "CREATE_WIDGET", widget: newWidget
     })),
   deleteWidget: (widget) =>
-    widgetService.deleteWidget(widget._id)
+    widgetService.deleteWidget(widget.id)
     .then(statue => dispatch({
       type: "DELETE_WIDGET", widget
     })),
   updateWidget: (widget) =>
-    widgetService.updateWidget(widget._id, widget)
+    widgetService.updateWidget(widget.id, widget)
     .then(status => dispatch({
       type: "UPDATE_WIDGET", widget
     }))
